@@ -46,14 +46,18 @@ const NotesList = ({ notes, startNoteEditing, deleteNote }) => {
             }
             {notes
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map(contact => (
+              .map(note => (
                 <CustomTableRow
-                  key={contact.id}
-                  note={contact}
-                  editingButtonClicked={() => startNoteEditing(contact.id)}
-                  deleteButtonClicked={() => deleteNote([contact.id])}
+                  key={note.id}
+                  note={note}
+                  editNote={() => startNoteEditing(note.id)}
+                  deleteNote={() => deleteNote([note.id])}
                 />
               ))}
+              {/* {emptyRows > 0 && (
+              
+            )} */}
+
           </Grid>
           <TablePagination
             component="div"
