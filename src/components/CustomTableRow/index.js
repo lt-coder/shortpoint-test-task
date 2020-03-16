@@ -1,6 +1,5 @@
 import React from 'react';
 import cx from 'classnames'
-import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import PropTypes from 'prop-types';
@@ -76,6 +75,14 @@ const useStyles = makeStyles(theme => ({
   },
   'bg-pink': {
     background: 'pink',
+  },
+  fr: {
+    float: 'right',
+  },
+  actionBtn: {
+    border: 'none',
+    borderRadius: '2px',
+    margin: '2px',
   }
 }));
 
@@ -87,7 +94,17 @@ const CustomTableRow = ({ note, key, isSelected, selectionChanged, editingButton
       <Paper className={classes.paper} elevation={3}>
         <div className={cx(classes.beforeContent, { [classes[`bg-${note.color}`]]: note.color })}>
         </div>
-        <div className={cx(classes.fs18, { [classes[note.color]]: note.color })} color={note.color}>Note {key}</div>
+        <div className={cx(classes.fs18, { [classes[note.color]]: note.color })} color={note.color}>
+          Note {key}
+          <span className={classes.fr}>
+            <button className={classes.actionBtn}>
+              <EditIcon color="action" onClick={() => editingButtonClicked()} />
+            </button>
+            <button className={classes.actionBtn}>
+              <DeleteIcon color="action" onClick={() => deleteButtonClicked()} />
+            </button>
+          </span>
+        </div>
         <div className={classes.text}>{note.noteText} {note.id}</div>
         <Divider className={classes.divider} variant='fullWidth' />
         <div className={classes.text}>{note.timeCreated} {note.id}</div>
