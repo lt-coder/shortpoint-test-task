@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.js": "/shortpoint-test-task/static/js/main.837244d6.chunk.js",
+    "main.js.map": "/shortpoint-test-task/static/js/main.837244d6.chunk.js.map",
+    "runtime-main.js": "/shortpoint-test-task/static/js/runtime-main.d4df954b.js",
+    "runtime-main.js.map": "/shortpoint-test-task/static/js/runtime-main.d4df954b.js.map",
+    "static/css/2.7045826a.chunk.css": "/shortpoint-test-task/static/css/2.7045826a.chunk.css",
+    "static/js/2.235a10e2.chunk.js": "/shortpoint-test-task/static/js/2.235a10e2.chunk.js",
+    "static/js/2.235a10e2.chunk.js.map": "/shortpoint-test-task/static/js/2.235a10e2.chunk.js.map",
+    "index.html": "/shortpoint-test-task/index.html",
+    "precache-manifest.672f1be139a3534023706e60ab8a95a0.js": "/shortpoint-test-task/precache-manifest.672f1be139a3534023706e60ab8a95a0.js",
+    "service-worker.js": "/shortpoint-test-task/service-worker.js",
+    "static/css/2.7045826a.chunk.css.map": "/shortpoint-test-task/static/css/2.7045826a.chunk.css.map",
+    "static/js/2.235a10e2.chunk.js.LICENSE.txt": "/shortpoint-test-task/static/js/2.235a10e2.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/shortpoint-test-task/static/media/roboto-latin-900italic.ebf6d164.woff2"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d4df954b.js",
+    "static/css/2.7045826a.chunk.css",
+    "static/js/2.235a10e2.chunk.js",
+    "static/js/main.837244d6.chunk.js"
+  ]
+}
