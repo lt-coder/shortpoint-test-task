@@ -21,7 +21,7 @@ const CustomPaper = ({ children }) => {
 }
 
 CustomPaper.propTypes = {
-  // children: PropTypes.arrayOf(PropTypes.element).isRequired,
+  children: PropTypes.arrayOf(PropTypes.element).isRequired,
 };
 
 export default CustomPaper;

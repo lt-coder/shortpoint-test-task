@@ -86,29 +86,28 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const CustomTableRow = ({ note, key, isSelected, selectionChanged, editingButtonClicked, deleteButtonClicked }) => {
+const CustomTableRow = ({ note, editNote, deleteNote }) => {
   const classes = useStyles();
-  console.log(note)
   return (
     <Grid key={note.id} className={classes.p20} item xs={4}>
       <Paper className={classes.paper} elevation={3}>
         <div className={cx(classes.beforeContent, { [classes[`bg-${note.color}`]]: note.color })}>
         </div>
         <div className={cx(classes.fs18, { [classes[note.color]]: note.color })} color={note.color}>
-          Note {key}
+          Note {note.id}
           <span className={classes.fr}>
             <button className={classes.actionBtn}>
-              <EditIcon color="action" onClick={() => editingButtonClicked()} />
+              <EditIcon color="action" onClick={() => editNote()} />
             </button>
             <button className={classes.actionBtn}>
-              <DeleteIcon color="action" onClick={() => deleteButtonClicked()} />
+              <DeleteIcon color="action" onClick={() => deleteNote()} />
             </button>
           </span>
         </div>
-        <div className={classes.text}>{note.noteText} {note.id}</div>
+        <div className={classes.text}>{note.noteText}</div>
         <Divider className={classes.divider} variant='fullWidth' />
-        <div className={classes.text}>{note.timeCreated} {note.id}</div>
-        <div >{note.time}{key}</div>
+        <div className={classes.text}>{note.timeCreated}</div>
+        <div >{note.time}</div>
       </Paper>
     </Grid>
   );
@@ -116,10 +115,8 @@ const CustomTableRow = ({ note, key, isSelected, selectionChanged, editingButton
 
 CustomTableRow.propTypes = {
   note: PropTypes.object.isRequired,
-  isSelected: PropTypes.bool.isRequired,
-  selectionChanged: PropTypes.func.isRequired,
-  editingButtonClicked: PropTypes.func.isRequired,
-  deleteButtonClicked: PropTypes.func.isRequired,
+  editNote: PropTypes.func.isRequired,
+  deleteNote: PropTypes.func.isRequired,
 };
 
 export default CustomTableRow;

@@ -7,6 +7,7 @@ import CustomTextField from '../../../../components/CustomTextField';
 import CustomButton from '../../../../components/CustomButton';
 import CustomSelectField from '../../../../components/CustomSelectField';
 import { reducer, initialState } from './reducer';
+import { COLOR_OPTIONS } from '../../../../constants';
 
 const useStyles = makeStyles(theme => ({
   layout: {
@@ -20,25 +21,6 @@ const useStyles = makeStyles(theme => ({
     margin: '20px auto',
   },
 }));
-
-const options = [
-  {
-    value: 'red',
-    label: 'red',
-  },
-  {
-    value: 'blue',
-    label: 'blue',
-  },
-  {
-    value: 'pink',
-    label: 'pink',
-  },
-  {
-    value: 'green',
-    label: 'green',
-  },
-]
 
 const inputFields = [
   {
@@ -84,12 +66,11 @@ const AddNoteForm = ({ noteToBeEdited, onSubmit, cancelNoteEditing }) => {
                 </Grid>
               ))
             }
-
             <Grid item xs={12}>
               <CustomSelectField
                 title="Color"
                 value={state.color}
-                options={options}
+                options={COLOR_OPTIONS}
                 errorMessage={state.error.color}
                 width="100%"
                 onChange={event => dispatch({ type: 'color', data: event.target.value })}
