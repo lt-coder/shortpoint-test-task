@@ -20,6 +20,9 @@ const useStyles = makeStyles(theme => ({
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(1),
   },
+  empty: {
+    height: '175px',
+  }
 }));
 
 const rowsPerPage = 6;
@@ -33,12 +36,14 @@ const NotesList = ({ notes, startNoteEditing, deleteNote }) => {
   };
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, notes.length - page * rowsPerPage);
-
   return (
     <React.Fragment>
       <main className={classes.layout}>
         <CustomPaper>
           <Grid className={classes.inputs} container spacing={0}>
+            {
+              emptyRows === 6 && <div className={classes.empty}> </div>
+            }
             {notes
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map(contact => (
