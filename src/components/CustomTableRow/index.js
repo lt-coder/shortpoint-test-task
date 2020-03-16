@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     background: 'whitesmoke',
     position: 'relative',
     padding: '0 8px',
-    overflow:'hidden',
+    overflow: 'hidden',
     marginBottom: '15px',
     '& > *': {
       margin: theme.spacing(1),
@@ -29,7 +29,6 @@ const useStyles = makeStyles(theme => ({
   },
   p20: {
     padding: '0 20px 10px 10px',
-    
   },
   fs18: {
     width: '100%',
@@ -58,14 +57,28 @@ const useStyles = makeStyles(theme => ({
   orange: {
     color: 'orange',
   },
-  beforecolor: {
+  beforeContent: {
     position: 'absolute',
     left: '0',
     width: '4px',
     height: '100%',
     margin: '0',
     maxHeight: '100%',
-    background: 'red', 
+  },
+  'bg-red': {
+    background: 'red',
+  },
+  'bg-blue': {
+    background: 'blue',
+  },
+  'bg-green': {
+    background: 'green',
+  },
+  'bg-orange': {
+    background: 'orange',
+  },
+  'bg-pink': {
+    background: 'pink',
   }
 }));
 
@@ -75,7 +88,7 @@ const CustomTableRow = ({ note, key, isSelected, selectionChanged, editingButton
   return (
     <Grid key={note.id} className={classes.p20} item xs={4}>
       <Paper className={classes.paper} elevation={3}>
-        <div className={cx(classes.beforecolor, { [classes[note.color]]: note.color })}>
+        <div className={cx(classes.beforeContent, { [classes[`bg-${note.color}`]]: note.color })}>
         </div>
         <div className={cx(classes.fs18, { [classes[note.color]]: note.color })} color={note.color}>Note {key}</div>
         <div className={classes.text}>{note.noteText} {node.id}</div>
