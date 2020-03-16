@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import moment from 'moment';
 
-let nextContactId = 0;
+let nextNoteId = 0;
 
 const configSlice = createSlice({
   name: 'notes',
@@ -9,35 +9,39 @@ const configSlice = createSlice({
     error: null,
     loading: false,
     list: [],
-    editContact: '',
+    editNote: '',
   },
   reducers: {
     addNote: {
       reducer(state, action) {
         state.list.push(action.payload);
       },
-      prepare(contact) {
-        return { payload: { ...contact, id: nextContactId++, timeCreated: moment().format('LLL') } }
+      prepare(note) {
+        return { 
+          payload: { 
+            ...note, 
+            id: nextNoteId++, 
+            timeCreated: moment().format('LLL'), 
+          } 
+        }
       }
     },
-    startContactEditing(state, action) {
-      state.editContact = action.payload;
+    startNoteEditing(state, action) {
+      state.editNote = action.payload;
     },
-    cancelContactEditing(state) {
-      state.editContact = '';
+    cancelNoteEditing(state) {
+      state.editNote = '';
     },
-    editContact(state, action) {
-      const editedContact = action.payload;
-      const indexOfContact = state.list.findIndex(contact => contact.id === editedContact.id);
-      state.list.splice(indexOfContact, 1, editedContact);
-      state.editContact = '';
+    editNote(state, action) {
+      const editedNote = action.payload;
+      const indexOfNote = state.list.findIndex(note => note.id === editedNote.id);
+      state.list.splice(indexOfNote, 1, editedNote);
+      state.editNote = '';
     },
-    deleteContacts(state, action) {
-      const contactIdsToBeDeleted = action.payload;
-      contactIdsToBeDeleted.forEach((contactId) => {
-        const indexOfContact = state.list.findIndex(contact => contact.id === contactId);
-        state.list.splice(indexOfContact, 1);
-      });
+    deleteNote(state, action) {
+      const noteToBeDeleted = action.payload;
+      const indexOfNote = state.list.findIndex(note => note.id === noteToBeDeleted);
+      state.list.splice(indexOfNote, 1);
     }
   }
 })
@@ -45,11 +49,11 @@ const configSlice = createSlice({
 const { actions, reducer } = configSlice;
 // Extract and export each action creator by name
 export const { 
-  addNote, 
-  startContactEditing, 
-  editContact, 
-  deleteContacts, 
-  cancelContactEditing, 
+  addNote,
+  startNoteEditing, 
+  cancelNoteEditing, 
+  editNote, 
+  deleteNote, 
 } = actions;
 // Export the reducer, either as a default or named export
 export default reducer;

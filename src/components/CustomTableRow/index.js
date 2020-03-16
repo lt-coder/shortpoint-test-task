@@ -1,12 +1,9 @@
 import React from 'react';
-import PropTypes, { node } from 'prop-types';
 import cx from 'classnames'
-import TableRow from '@material-ui/core/TableRow';
-import TableCell from '@material-ui/core/TableCell';
-import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -91,9 +88,9 @@ const CustomTableRow = ({ note, key, isSelected, selectionChanged, editingButton
         <div className={cx(classes.beforeContent, { [classes[`bg-${note.color}`]]: note.color })}>
         </div>
         <div className={cx(classes.fs18, { [classes[note.color]]: note.color })} color={note.color}>Note {key}</div>
-        <div className={classes.text}>{note.noteText} {node.id}</div>
+        <div className={classes.text}>{note.noteText} {note.id}</div>
         <Divider className={classes.divider} variant='fullWidth' />
-        <div className={classes.text}>{note.timeCreated} {node.id}</div>
+        <div className={classes.text}>{note.timeCreated} {note.id}</div>
         <div >{note.time}{key}</div>
       </Paper>
     </Grid>

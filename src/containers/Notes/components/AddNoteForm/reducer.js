@@ -12,9 +12,9 @@ export const reducer = (state = initialState, action) => {
     case 'color':
       return { ...state, color: action.data };
     case 'timeCreated':
-      return {...state, time: action.data };
+      return { ...state, time: action.data };
     case 'reset':
-      return initialState;
+      return { ...state, ...action.data };
     case 'error':
       return { ...state, error: action.data };
     default:

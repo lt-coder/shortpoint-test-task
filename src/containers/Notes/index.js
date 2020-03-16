@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { addNote, cancelContactEditing, startContactEditing, editContact, deleteContacts } from './reducer';
-import NodeList from './components/NoteList';
-import AddNoteForm from './components/AddNoteForm';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import NodeList from './components/NoteList';
+import AddNoteForm from './components/AddNoteForm';
+import { addNote, cancelNoteEditing, startNoteEditing, editNote, deleteNote } from './reducer';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -13,22 +13,22 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Phonebook = ({
-  contacts,
+const NotesDashboard = ({
+  notes,
   addNote,
-  cancelContactEditing,
-  startContactEditing,
-  editContact,
-  deleteContacts,
-  contactToBeEdited,
+  cancelNoteEditing,
+  startNoteEditing,
+  editNote,
+  deleteNote,
+  noteToBeEdited,
 }) => {
   const classes = useStyles();
 
-  const onSubmit = (contact) => {
-    if (contactToBeEdited) {
-      editContact(contact);
+  const onSubmit = (note) => {
+    if (noteToBeEdited) {
+      editNote(note);
     } else {
-      addNote(contact);
+      addNote(note);
     }
   }
 
@@ -38,15 +38,15 @@ const Phonebook = ({
         <Grid item sm={12} md={12}>
           <AddNoteForm
             onSubmit={onSubmit}
-            contactToBeEdited={contactToBeEdited}
-            cancelContactEditing={cancelContactEditing}
+            noteToBeEdited={noteToBeEdited}
+            cancelNoteEditing={cancelNoteEditing}
           />
         </Grid>
         <Grid item sm={12} md={12}>
           <NodeList
-            contacts={contacts}
-            deleteContacts={deleteContacts}
-            startContactEditing={startContactEditing}
+            notes={notes}
+            deleteNote={deleteNote}
+            startNoteEditing={startNoteEditing}
           />
         </Grid>
       </Grid>
@@ -54,26 +54,26 @@ const Phonebook = ({
   );
 }
 
-Phonebook.propTypes = {
-  contacts: PropTypes.array.isRequired,
+NotesDashboard.propTypes = {
+  notes: PropTypes.array.isRequired,
   addNote: PropTypes.func.isRequired,
-  editContact: PropTypes.func.isRequired,
-  deleteContacts: PropTypes.func.isRequired,
-  startContactEditing: PropTypes.func.isRequired,
-  cancelContactEditing: PropTypes.func.isRequired,
-  contactToBeEdited: PropTypes.object,
+  editNote: PropTypes.func.isRequired,
+  deleteNote: PropTypes.func.isRequired,
+  startNoteEditing: PropTypes.func.isRequired,
+  cancelNoteEditing: PropTypes.func.isRequired,
+  noteToBeEdited: PropTypes.object,
 };
 
-const mapDispatchToProps = { addNote, startContactEditing, cancelContactEditing, editContact, deleteContacts };
+const mapDispatchToProps = { addNote, cancelNoteEditing, startNoteEditing, editNote, deleteNote };
 
 const mapStateToProps = (state) => {
   return {
-    contacts: state.notes.list,
-    contactToBeEdited: state.notes.list.find(contact => contact.id === state.notes.editContact),
+    notes: state.notes.list,
+    noteToBeEdited: state.notes.list.find(note => note.id === state.notes.editNote),
   }
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Phonebook);
+)(NotesDashboard);
