@@ -42,7 +42,9 @@ const NotesList = ({ notes, startNoteEditing, deleteNote }) => {
         <CustomPaper>
           <Grid className={classes.inputs} container spacing={0}>
             {
-              emptyRows === 6 && <div className={classes.empty}> </div>
+              emptyRows === 6 && <div className={classes.empty}>
+                <b> No notes found, please add notes.</b>
+              </div>
             }
             {notes
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -54,10 +56,6 @@ const NotesList = ({ notes, startNoteEditing, deleteNote }) => {
                   deleteNote={() => deleteNote([note.id])}
                 />
               ))}
-              {/* {emptyRows > 0 && (
-              
-            )} */}
-
           </Grid>
           <TablePagination
             component="div"

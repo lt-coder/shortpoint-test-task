@@ -20,6 +20,10 @@ const useStyles = makeStyles(theme => ({
     display: 'table',
     margin: '20px auto',
   },
+  submitBtn: {
+    display: 'flex',
+    justifyContent: 'center',
+  }
 }));
 
 const inputFields = [
@@ -76,7 +80,7 @@ const AddNoteForm = ({ noteToBeEdited, onSubmit, cancelNoteEditing }) => {
                 onChange={event => dispatch({ type: 'color', data: event.target.value })}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} className={classes.submitBtn}>
               <CustomButton title="Save Note" onClick={handleOnSubmit} />
               {
                 noteToBeEdited && (
