@@ -15,13 +15,10 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(2),
   },
   inputs: {
-    maxWidth: '40%',
+    maxWidth: '50%',
     display: 'table',
     margin: '20px auto',
   },
-  mt15: {
-    marginTop: '15px',
-  }
 }));
 
 const options = [
@@ -52,7 +49,6 @@ const inputFields = [
 
 const AddNoteForm = ({ noteToBeEdited, onSubmit, cancelNoteEditing }) => {
   const classes = useStyles();
-
   
   const [state, dispatch] = useReducer(reducer, initialState);
   useEffect(() => {
@@ -74,7 +70,7 @@ const AddNoteForm = ({ noteToBeEdited, onSubmit, cancelNoteEditing }) => {
     <React.Fragment>
       <main className={classes.layout}>
         <form>
-          <Grid className={classes.inputs} spacing={5} container justify='center'>
+          <Grid className={classes.inputs} spacing={2} container justify='center'>
             {
               inputFields.map(input => (
                 <Grid key={input.id} item xs={12}>
@@ -89,7 +85,7 @@ const AddNoteForm = ({ noteToBeEdited, onSubmit, cancelNoteEditing }) => {
               ))
             }
 
-            <Grid className={classes.mt15} item xs={12}>
+            <Grid item xs={12}>
               <CustomSelectField
                 title="Color"
                 value={state.color}
@@ -99,16 +95,18 @@ const AddNoteForm = ({ noteToBeEdited, onSubmit, cancelNoteEditing }) => {
                 onChange={event => dispatch({ type: 'color', data: event.target.value })}
               />
             </Grid>
-            <CustomButton title="Save Note" onClick={handleOnSubmit} />
-            {
-              noteToBeEdited && (
-                <CustomButton
-                  title="Cancel"
-                  color="secondary"
-                  onClick={() => cancelNoteEditing()}
-                />
-              )
-            }
+            <Grid item xs={12}>
+              <CustomButton title="Save Note" onClick={handleOnSubmit} />
+              {
+                noteToBeEdited && (
+                  <CustomButton
+                    title="Cancel"
+                    color="secondary"
+                    onClick={() => cancelNoteEditing()}
+                  />
+                )
+              }
+            </Grid>
           </Grid>
         </form>
       </main>

@@ -49,6 +49,10 @@ const NotesList = ({ notes, startNoteEditing, deleteNote }) => {
                   deleteButtonClicked={() => deleteNote([contact.id])}
                 />
               ))}
+              {/* {emptyRows > 0 && (
+              
+            )} */}
+
           </Grid>
           <TablePagination
             component="div"
