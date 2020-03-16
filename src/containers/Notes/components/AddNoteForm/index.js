@@ -1,14 +1,12 @@
 import React, { useReducer, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { validateContact } from './validation';
+import { validateNote } from './validation';
 import CustomTextField from '../../../../components/CustomTextField';
 import CustomButton from '../../../../components/CustomButton';
 import CustomSelectField from '../../../../components/CustomSelectField';
 import { reducer, initialState } from './reducer';
-import moment from 'moment';
 
 const useStyles = makeStyles(theme => ({
   layout: {
@@ -52,16 +50,17 @@ const inputFields = [
   },
 ]
 
-const AddContactForm = ({ contactToBeEdited, onSubmit, cancelContactEditing }) => {
+const AddNoteForm = ({ noteToBeEdited, onSubmit, cancelNoteEditing }) => {
   const classes = useStyles();
 
+  
   const [state, dispatch] = useReducer(reducer, initialState);
   useEffect(() => {
-    dispatch({ type: 'reset', data: contactToBeEdited || initialState })
-  }, [contactToBeEdited]);
+    dispatch({ type: 'reset', data: noteToBeEdited || initialState })
+  }, [noteToBeEdited]);
 
   const handleOnSubmit = () => {
-    const errors = validateContact(state);
+    const errors = validateNote(state);
     if (Object.entries(errors).length === 0) {
       const { error, ...otherState } = state;
       onSubmit(otherState);
@@ -75,9 +74,6 @@ const AddContactForm = ({ contactToBeEdited, onSubmit, cancelContactEditing }) =
     <React.Fragment>
       <main className={classes.layout}>
         <form>
-          <Typography className={classes.mt15} component="h2" variant="h4" align="center">
-            Note
-          </Typography>
           <Grid className={classes.inputs} container justify='center' spacing={0}>
             {
               inputFields.map(input => (
@@ -94,20 +90,22 @@ const AddContactForm = ({ contactToBeEdited, onSubmit, cancelContactEditing }) =
             }
 
             <Grid className={classes.mt15} item xs={12}>
-              < CustomSelectField
+              <CustomSelectField
+                title="Color"
                 value={state.color}
                 options={options}
-                width='100%'
-                handleChange={event => dispatch({ type: 'color', data: event.target.value })}
+                errorMessage={state.error.color}
+                width="100%"
+                onChange={event => dispatch({ type: 'color', data: event.target.value })}
               />
             </Grid>
-            <CustomButton title="Add Note" onClick={handleOnSubmit} />
+            <CustomButton title="Save Note" onClick={handleOnSubmit} />
             {
-              contactToBeEdited && (
+              noteToBeEdited && (
                 <CustomButton
                   title="Cancel"
                   color="secondary"
-                  onClick={() => cancelContactEditing()}
+                  onClick={() => cancelNoteEditing()}
                 />
               )
             }
@@ -118,10 +116,10 @@ const AddContactForm = ({ contactToBeEdited, onSubmit, cancelContactEditing }) =
   );
 }
 
-AddContactForm.propTypes = {
+AddNoteForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  contactToBeEdited: PropTypes.object,
-  cancelContactEditing: PropTypes.func.isRequired,
+  noteToBeEdited: PropTypes.object,
+  cancelNoteEditing: PropTypes.func.isRequired,
 };
 
-export default AddContactForm;
+export default AddNoteForm;

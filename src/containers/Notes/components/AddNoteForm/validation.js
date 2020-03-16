@@ -1,4 +1,4 @@
-export const validateContact = values => {
+export const validateNote = values => {
   const errors = {};
   const requiredFields = [
     'color',
