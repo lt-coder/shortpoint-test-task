@@ -1,5 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { node } from 'prop-types';
+import cx from 'classnames'
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -8,33 +9,86 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import { Divider } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
-  root: {
+  paper: {
     display: 'flex',
     flexWrap: 'wrap',
+    minHeight: '150px',
+    width: '100%',
+    background: 'whitesmoke',
+    position: 'relative',
+    padding: '0 8px',
+    overflow:'hidden',
+    marginBottom: '15px',
     '& > *': {
       margin: theme.spacing(1),
-      width: theme.spacing(16),
-      height: theme.spacing(16),
-    },
+    }
   },
+  p20: {
+    padding: '0 20px 10px 10px',
+    
+  },
+  fs18: {
+    width: '100%',
+    fontSize: '18px',
+    maxHeight: '25px',
+  },
+  text: {
+    width: '100%',
+    maxHeight: '30px',
+  },
+  divider: {
+    width: '-webkit-fill-available'
+  },
+  red: {
+    color: 'red',
+  },
+  pink: {
+    color: 'pink',
+  },
+  blue: {
+    color: 'blue',
+  },
+  green: {
+    color: 'green',
+  },
+  orange: {
+    color: 'orange',
+  },
+  beforecolor: {
+    position: 'absolute',
+    left: '0',
+    width: '4px',
+    height: '100%',
+    margin: '0',
+    maxHeight: '100%',
+    background: 'red', 
+  }
 }));
 
-const CustomTableRow = ({ contact, isSelected, selectionChanged, editingButtonClicked, deleteButtonClicked }) => {
+const CustomTableRow = ({ note, key, isSelected, selectionChanged, editingButtonClicked, deleteButtonClicked }) => {
   const classes = useStyles();
-
+  console.log(note)
   return (
-    <div className={classes.root}>
-      <Paper elevation={3}>
-        {contact.color}
+    <Grid key={note.id} className={classes.p20} item xs={4}>
+      <Paper className={classes.paper} elevation={3}>
+        <div className={cx(classes.beforecolor, { [classes[note.color]]: note.color })}>
+        </div>
+        <div className={cx(classes.fs18, { [classes[note.color]]: note.color })} color={note.color}>Note {key}</div>
+        <div className={classes.text}>{note.noteText} {node.id}</div>
+        <Divider className={classes.divider} variant='fullWidth' />
+        <div className={classes.text}>{note.timeCreated} {node.id}</div>
+        <div >{note.time}{key}</div>
       </Paper>
-    </div>
+    </Grid>
   );
 }
 
 CustomTableRow.propTypes = {
-  contact: PropTypes.object.isRequired,
+  note: PropTypes.object.isRequired,
   isSelected: PropTypes.bool.isRequired,
   selectionChanged: PropTypes.func.isRequired,
   editingButtonClicked: PropTypes.func.isRequired,

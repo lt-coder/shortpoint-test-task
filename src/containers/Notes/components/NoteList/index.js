@@ -10,6 +10,7 @@ import CustomPaper from '../../../../components/CustomPaper';
 import CustomTableRow from '../../../../components/CustomTableRow';
 import CustomTableHead from '../../../../components/CustomTableHead';
 import ContactListBar from '../../../../components/ContactListBar';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles(theme => ({
   layout: {
@@ -27,7 +28,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const rowsPerPage = 2;
+const rowsPerPage = 6;
 
 const ContactList = ({ contacts, startContactEditing, deleteContacts }) => {
   const classes = useStyles();
@@ -39,7 +40,7 @@ const ContactList = ({ contacts, startContactEditing, deleteContacts }) => {
   };
 
   const selectAll = () => {
-    if(contacts.length === selectedIds.length) {
+    if (contacts.length === selectedIds.length) {
       selectId([]);
     } else {
       const allIds = contacts.map(contact => contact.id);
@@ -48,11 +49,11 @@ const ContactList = ({ contacts, startContactEditing, deleteContacts }) => {
   }
 
   const handleSelect = contactId => {
-    if(selectedIds.includes(contactId)) {
+    if (selectedIds.includes(contactId)) {
       selectId(selectedIds.filter(selectedContactId => selectedContactId !== contactId));
     } else {
       selectedIds.push(contactId)
-      selectId([ ...selectedIds ]);
+      selectId([...selectedIds]);
     }
   };
 
@@ -67,35 +68,20 @@ const ContactList = ({ contacts, startContactEditing, deleteContacts }) => {
     <React.Fragment>
       <main className={classes.layout}>
         <CustomPaper>
-          {/* <ContactListBar 
-            numOfSelectedItems={selectedIds.length} 
-            deleteSelectedItems={() => handleContactsDelete(selectedIds)}
-          /> */}
-          {/* <Table size="small">
-            <CustomTableHead 
-              isSelected={(selectedIds.length === contacts.length) && selectedIds.length > 0}
-              onChange={selectAll}
-            />
-            <TableBody> */}
-              { contacts
+          <Grid className={classes.inputs} container spacing={0}>
+            {contacts
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map(contact => (
-                <CustomTableRow 
+                <CustomTableRow
                   key={contact.id}
-                  contact={contact}
+                  note={contact}
                   isSelected={selectedIds.includes(contact.id)}
                   selectionChanged={() => handleSelect(contact.id)}
                   editingButtonClicked={() => startContactEditing(contact.id)}
-                  deleteButtonClicked={() => handleContactsDelete([ contact.id ])}
+                  deleteButtonClicked={() => handleContactsDelete([contact.id])}
                 />
               ))}
-              {/* {emptyRows > 0 && (
-              <TableRow style={{ height: (61) * emptyRows }}>
-                <TableCell colSpan={6} />
-              </TableRow>
-            )}
-            </TableBody>
-          </Table> */}
+          </Grid>
           <TablePagination
             component="div"
             count={contacts.length}

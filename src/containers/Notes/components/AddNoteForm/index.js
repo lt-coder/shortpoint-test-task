@@ -78,7 +78,7 @@ const AddContactForm = ({ contactToBeEdited, onSubmit, cancelContactEditing }) =
           <Typography className={classes.mt15} component="h2" variant="h4" align="center">
             Note
           </Typography>
-          <Grid className={classes.inputs} container justify='center' spacing={0}>
+          <Grid className={classes.inputs} spacing={5} container justify='center'>
             {
               inputFields.map(input => (
                 <Grid key={input.id} item xs={12}>
